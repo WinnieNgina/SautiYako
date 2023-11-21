@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MailKit.Net.Smtp;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SautiYako.Data;
 using SautiYako.Models;
 using SautiYako.Repository;
 using System.Text;
+using SautiYako.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<TextToSpeechRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -91,6 +94,9 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
     };
 });
+builder.Services.Configure<EmailOptions>(builder.Configuration.GetSection("Email"));
+builder.Services.AddTransient<EmailService>();
+builder.Services.AddScoped<SmtpClient>();
 
 var app = builder.Build();
 

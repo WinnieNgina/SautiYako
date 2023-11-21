@@ -5,10 +5,11 @@ using SautiYako.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using SautiYako.Interfaces;
 
 namespace SautiYako.Repository
 {
-    public class UserRepository
+    public class UserRepository:IUserRepository
     {
         private readonly DataContext _context;
         private readonly UserManager<User> _userManager;
@@ -154,4 +155,4 @@ namespace SautiYako.Repository
         }
     }
 }
-}
+
