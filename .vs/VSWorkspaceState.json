@@ -2,7 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\SautiYako",
-    "\\SautiYako\\Migrations"
+    "\\SautiYako\\Controllers",
+    "\\SautiYako\\Interfaces",
+    "\\SautiYako\\Migrations",
+    "\\SautiYako\\Models"
   ],
+  "SelectedNode": "\\SautiYako.sln",
   "PreviewInSolutionExplorer": false
 }

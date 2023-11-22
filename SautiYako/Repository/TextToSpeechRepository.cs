@@ -8,8 +8,7 @@
             string FileName = guid.ToString() + ".mp3";
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Post, "https://api.openai.com/v1/audio/speech");
-            request.Headers.Add("Authorization", "Bearer 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");
-            request.Headers.Add("Cookie", "__cf_bm=5nysEBbbMaeK2f.mk7_sFYxuKyukGvtpj7HH1hFEYJo-1700497952-0-AQF/nKKZ11QxfPIGPgfxckfAqy5GJlQmy4PGERFsQiF+Darr7/0IFv13IJ4IS120HM0aFLF8FoBo44sjdBOMttQ=; _cfuvid=19fN8MMNA9gbZkGZDUp2tLObiLPcV7smKm9v2PoWRxY-1700497952130-0-604800000");
+            request.Headers.Add("Authorization", "Bearer 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");
             var content = new StringContent($"{{\"model\": \"tts-1\", \"input\": \"{text}\", \"voice\": \"alloy\"}}", null, "application/json");
             request.Content = content;
 

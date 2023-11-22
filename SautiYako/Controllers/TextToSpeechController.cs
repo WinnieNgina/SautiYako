@@ -12,7 +12,7 @@ namespace SautiYako.Controllers
         {
             _textToSpeechRepository = textToSpeechRepository;
         }
-        [HttpGet("{text}")]
+        [HttpPost("{text}")]
         public async Task<IActionResult> GetTextToSpeech(string text)
         {
             var fileName = await _textToSpeechRepository.Transcribe(text);

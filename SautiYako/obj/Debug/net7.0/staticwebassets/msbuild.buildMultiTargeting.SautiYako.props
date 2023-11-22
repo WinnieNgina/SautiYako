@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SautiYako.props" />
+</Project>

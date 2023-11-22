@@ -24,7 +24,7 @@ namespace SautiYako.Controllers
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(ICollection<User>))]
-        [Authorize]
+        //[Authorize]
         public IActionResult GetUsers()
         {
             var users = _userRepository.GetUsers();
@@ -123,7 +123,7 @@ namespace SautiYako.Controllers
             else
             {
                 // Email confirmation failed
-                return BadRequest("Failed to confirm email");
+                return BadRequest($"Failed to confirm email: {string.Join(", ", result.Errors.Select(e => e.Description))}");
             }
         }
         
