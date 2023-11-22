@@ -1,16 +1,15 @@
-﻿using SautiYako.Interfaces;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SautiYako.Interfaces;
 using SautiYako.Models;
 using SautiYako.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
 
 namespace SautiYako.Controllers
 {
-   
+
     [Route("api/[controller]")]
     [ApiController]
-   
+
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -50,7 +49,7 @@ namespace SautiYako.Controllers
                 PhoneNumber = model.PhoneNumber,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-            
+
             };
             string password = model.Password;
             var result = await _userRepository.CreateUserAsync(user, password);
@@ -85,7 +84,7 @@ namespace SautiYako.Controllers
             // Include error details in the response
             return BadRequest(new { Message = "Failed to create user", Errors = result.Errors });
         }
-        
+
         [HttpPost("ConfirmEmail")]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
@@ -126,7 +125,7 @@ namespace SautiYako.Controllers
                 return BadRequest($"Failed to confirm email: {string.Join(", ", result.Errors.Select(e => e.Description))}");
             }
         }
-        
+
         [HttpPost("Login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -172,7 +171,7 @@ namespace SautiYako.Controllers
             return Ok(new { user.Id, user.UserName, user.Email });
 
         }
-   
+
         [HttpPut("{userId}")]
         public async Task<IActionResult> UpdateUser(string userId, UserUpdateModel model)
         {
@@ -239,5 +238,5 @@ namespace SautiYako.Controllers
         }
 
     }
-    
+
 }

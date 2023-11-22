@@ -1,5 +1,5 @@
-using SautiYako.Models;
 using Microsoft.AspNetCore.Identity;
+using SautiYako.Models;
 
 namespace SautiYako.Interfaces
 {

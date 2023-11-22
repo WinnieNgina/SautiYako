@@ -3,7 +3,7 @@ namespace SautiYako.Models;
 
 public class ChangePasswordModel
 {
-    
+
     [Required]
     [DataType(DataType.Password)]
     [Display(Name = "Current Password")]

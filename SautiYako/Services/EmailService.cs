@@ -1,9 +1,8 @@
-using SautiYako.Models;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using MailKit;
+using SautiYako.Models;
 
 
 namespace SautiYako.Services

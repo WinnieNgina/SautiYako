@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SautiYako.Repository;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace SautiYako.Controllers
 {
@@ -24,10 +20,18 @@ namespace SautiYako.Controllers
             if (file == null || file.Length == 0)
                 return BadRequest("File not selected");
 
+            var extension = Path.GetExtension(file.FileName);
+            if (extension != ".mp3")
+            {
+                return BadRequest("Invalid file extension. Only .mp3 files are allowed.");
+            }
+
             try
             {
-                // Save the uploaded file to a temporary location
-                var filePath = Path.GetTempFileName();
+                // Save the uploaded file to a temporary location with the original extension
+                var filePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + extension);
+                // Console.WriteLine(filePath);
+
                 using (var stream = System.IO.File.Create(filePath))
                 {
                     await file.CopyToAsync(stream);

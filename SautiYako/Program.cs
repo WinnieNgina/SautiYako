@@ -1,15 +1,15 @@
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MailKit.Net.Smtp;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SautiYako.Data;
+using SautiYako.Interfaces;
 using SautiYako.Models;
 using SautiYako.Repository;
-using System.Text;
 using SautiYako.Services;
-using SautiYako.Interfaces;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
