@@ -9,5 +9,8 @@ namespace SautiYako.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
+        public DbSet<SpeechToText> SpeechToTexts { get; set; }
+        public DbSet<TextToSpeech> TextToSpeeches { get; set; }
+        public DbSet<TextToSpeechLog> TextToSpeechLogs { get; set; }
     }
 }

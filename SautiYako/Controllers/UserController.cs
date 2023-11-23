@@ -58,12 +58,13 @@ namespace SautiYako.Controllers
             {
                 // Generate email confirmation token
                 var token = await _userRepository.GenerateEmailConfirmationTokenAsync(user);
+                //Console.WriteLine($"Generated Token: {token}");
                 //Console.WriteLine($"User ID: {user.Id}");
                 //Console.WriteLine($"Token: {token}");
                 var callbackUrl = Url.Action("ConfirmEmail", "User", new
                 {
                     userId = Uri.EscapeDataString(user.Id),
-                    token = Uri.EscapeDataString(token)
+                    token = token // Do not use Uri.EscapeDataString for token here
                 }, "https", Request.Host.Value);
                 //Console.WriteLine($"Callback URL: {callbackUrl}");
 
@@ -95,6 +96,7 @@ namespace SautiYako.Controllers
             }
             var decodedUserId = Uri.UnescapeDataString(userId);
             var decodedToken = Uri.UnescapeDataString(token);
+            //Console.WriteLine($"Decoded Token: {decodedToken}");
             // Find the user by their ID
             var user = await _userRepository.GetUserByIdAsync(decodedUserId);
 
@@ -106,13 +108,6 @@ namespace SautiYako.Controllers
 
             // Verify the email confirmation token
             var result = await _userRepository.ConfirmEmailAsync(user, decodedToken);
-
-            // Log the result of the email confirmation
-            Console.WriteLine($"Email confirmation result: {result.Succeeded}");
-            if (!result.Succeeded)
-            {
-                Console.WriteLine($"Email confirmation errors: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-            }
 
             if (result.Succeeded)
             {
